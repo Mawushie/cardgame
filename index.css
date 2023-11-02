@@ -1,0 +1,91 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*typography*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: url("./images/table.png");
+  background-size: cover;
+  font-family: "Exo 2", sans-serif;
+}
+
+.shuffle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shuffle p {
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+button {
+  background-color: #fff100;
+  font-family: "Exo 2", sans-serif;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5em;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button#new-deck {
+  align-self: flex-start;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+h2 {
+  text-align: center;
+  color: #ffffff;
+}
+
+.card-slot {
+  height: 140px;
+  width: calc(140px * 5 / 7);
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  body {
+    width: 600px;
+    margin: auto;
+  }
+}
