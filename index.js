@@ -11,35 +11,36 @@ let computerScore = 0;
 let playerScore = 0;
 drawBtn.setAttribute("disabled", true);
 
-const getNewDeck = () => {
-  fetch("https://www.deckofcardsapi.com/api/deck/new/shuffle")
-    .then((res) => res.json())
-    .then((data) => {
-      //   console.log(data);
-      deckID = data.deck_id;
-      remainingText.textContent = `Remaining cards: ${data.remaining}`;
-      //   console.log(deckID);
-      drawBtn.removeAttribute("disabled");
-    });
+const getNewDeck = async () => {
+  const res = await fetch(
+    "https://www.deckofcardsapi.com/api/deck/new/shuffle"
+  );
+  const data = await res.json();
+  //   console.log(data);
+  deckID = data.deck_id;
+  remainingText.textContent = `Remaining cards: ${data.remaining}`;
+  //   console.log(deckID);
+  drawBtn.removeAttribute("disabled");
 };
 
-const drawCardsFromDeck = () => {
-  fetch(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=2`)
-    .then((res) => res.json())
-    .then((data) => {
-      remainingText.textContent = `Remaining cards: ${data.remaining}`;
-      displayCards(data.cards);
-      if (data.remaining == 0) {
-        drawBtn.setAttribute("disabled", true);
-        if (computerScore > playerScore) {
-          winnerText.textContent = `Computer Wins!!!`;
-        } else if (computerScore < playerScore) {
-          winnerText.textContent = `You Win!!!`;
-        } else {
-          winnerText.textContent = `It was a tie!!!`;
-        }
-      }
-    });
+const drawCardsFromDeck = async () => {
+  const res = await fetch(
+    `https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=2`
+  );
+  const data = await res.json();
+
+  remainingText.textContent = `Remaining cards: ${data.remaining}`;
+  displayCards(data.cards);
+  if (data.remaining == 0) {
+    drawBtn.setAttribute("disabled", true);
+    if (computerScore > playerScore) {
+      winnerText.textContent = `Computer Wins!!!`;
+    } else if (computerScore < playerScore) {
+      winnerText.textContent = `You Win!!!`;
+    } else {
+      winnerText.textContent = `It was a tie!!!`;
+    }
+  }
 };
 
 const displayCards = (arrayOfCards) => {
