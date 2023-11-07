@@ -1,3 +1,4 @@
+//variable declarations
 let deckID = "";
 const shuffleDeck = document.getElementById("new-deck");
 const remainingText = document.getElementById("remaining-cards");
@@ -9,8 +10,11 @@ const playerText = document.getElementById("player");
 let remaining;
 let computerScore = 0;
 let playerScore = 0;
+
+//setting the state of button to disabled
 drawBtn.setAttribute("disabled", true);
 
+//function to get new deck of cards
 const getNewDeck = async () => {
   const res = await fetch(
     "https://www.deckofcardsapi.com/api/deck/new/shuffle"
@@ -23,6 +27,7 @@ const getNewDeck = async () => {
   drawBtn.removeAttribute("disabled");
 };
 
+//fuunction to get cards from a particular deck
 const drawCardsFromDeck = async () => {
   const res = await fetch(
     `https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=2`
@@ -43,6 +48,7 @@ const drawCardsFromDeck = async () => {
   }
 };
 
+//function to display cars gotten from the deck
 const displayCards = (arrayOfCards) => {
   //   cardsDiv.innerHTML = "";
   cardsContainer.children[0].innerHTML = `
@@ -55,6 +61,7 @@ const displayCards = (arrayOfCards) => {
   determineWinningCard(arrayOfCards[0], arrayOfCards[1]);
 };
 
+//funtion to determine winning card
 const determineWinningCard = (card1, card2) => {
   const valueOptions = [
     "2",
